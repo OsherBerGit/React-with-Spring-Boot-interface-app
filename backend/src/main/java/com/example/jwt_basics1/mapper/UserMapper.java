@@ -1,4 +1,4 @@
-package com.example.jwt_basics1.config.mapper;
+package com.example.jwt_basics1.mapper;
 
 import com.example.jwt_basics1.dto.UserDto;
 import com.example.jwt_basics1.entity.Role;

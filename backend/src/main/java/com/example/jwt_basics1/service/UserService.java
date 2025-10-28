@@ -1,6 +1,6 @@
 package com.example.jwt_basics1.service;
 
-import com.example.jwt_basics1.config.mapper.UserMapper;
+import com.example.jwt_basics1.mapper.UserMapper;
 import com.example.jwt_basics1.dto.UserDto;
 import com.example.jwt_basics1.entity.User;
 import com.example.jwt_basics1.repository.UserRepository;
