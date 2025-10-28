@@ -25,27 +25,27 @@ public class UserController {
         return "Welcome to the Backend Server ADMIN home page";
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public List<UserDto> getAllUsers() { // החזרת רשימת כל המשתמשים
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}")
     public UserDto getUserById(@PathVariable Long id) { // החזרת משתמש לפי ID
         return userService.getUserById(id);
     }
 
-    @PostMapping
+    @PostMapping("/users")
     public UserDto createUser(@RequestBody UserDto userDto) { // יצירת משתמש חדש
         return userService.createUser(userDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/users/{id}")
     public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto userDto) { // עדכון פרטי משתמש קיים
         return userService.updateUser(id, userDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) { // מחיקת משתמש לפי ID
         userService.deleteUser(id);
     }

@@ -63,7 +63,7 @@ public class SecurityConfig {
 
                 // הוספת מנגנון ה-Logout
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
+                        .logoutUrl("/api/auth/logout")
                         .logoutSuccessHandler(customLogoutHandler) // מחלקת לוגאוט מותאמת אישית
                         .invalidateHttpSession(true) // איבוד תקפות של הסשן
                         .clearAuthentication(true)
@@ -72,15 +72,15 @@ public class SecurityConfig {
                 // Configuring authorization for HTTP requests
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/login", "/register", "/home").permitAll()
                 
                         // User endpoints - accessible by authenticated users
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/users/**", "/users/**").hasAnyRole("USER", "ADMIN")
                 
                         // Admin-only endpoints
-                        .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/users/**", "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/users/**", "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/**", "/users/**").hasRole("ADMIN")
 
                         .requestMatchers("/api/login/**").permitAll()
                         .requestMatchers("/api/refresh-token/**").permitAll() // Refresh token path
