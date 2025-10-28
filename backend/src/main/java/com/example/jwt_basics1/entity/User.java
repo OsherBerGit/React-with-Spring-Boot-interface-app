@@ -1,12 +1,11 @@
 package com.example.jwt_basics1.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
+
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,5 +32,4 @@ public class User {
             uniqueConstraints = @UniqueConstraint(columnNames = {"USER_ID", "ROLE_ID"})
     )
     private List<Role> roles;
-
 }

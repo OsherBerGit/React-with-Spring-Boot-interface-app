@@ -49,7 +49,7 @@ public class RefreshTokenService {
 
         // create a new access token
         String newAccessToken = jwtUtil.generateToken(null, userDetails, jwtID);
-        String newRefreshToken = jwtUtil.generateRefreshToken(userDetails, jwtID);
+        String newRefreshToken = jwtUtil.generateRefreshToken(null, userDetails, jwtID);
 
         // returns the new access token along with the refresh token
         return new AuthenticationResponse(newAccessToken, newRefreshToken);

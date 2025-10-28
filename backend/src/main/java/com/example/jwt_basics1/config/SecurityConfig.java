@@ -6,6 +6,7 @@ import com.example.jwt_basics1.service.TokenBlacklistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -71,21 +72,21 @@ public class SecurityConfig {
                 // Configuring authorization for HTTP requests
                 .authorizeHttpRequests(auth -> auth
                         // Public endpoints
-                        .antMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
                 
                         // User endpoints - accessible by authenticated users
-                        .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/users/**").hasAnyRole("USER", "ADMIN")
                 
                         // Admin-only endpoints
-                        .antMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
-                        .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
 
-                        .requestMatchers("api/login/**").permitAll()
-                        .requestMatchers("api/refresh-token/**").permitAll() // Refresh token path
+                        .requestMatchers("/api/login/**").permitAll()
+                        .requestMatchers("/api/refresh-token/**").permitAll() // Refresh token path
 
-                        .requestMatchers("api/protected-message-admin").hasAnyRole("ADMIN")
-                        .requestMatchers("api/protected-message").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/protected-message-admin").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/protected-message").hasAnyRole("USER", "ADMIN")
 
                         // All other requests must be authenticated
                         .anyRequest().authenticated());

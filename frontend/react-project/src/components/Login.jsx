@@ -14,6 +14,7 @@ const Login = () => {
       sessionStorage.setItem("refreshToken", response.data.refreshToken);
       console.log("Login successful");
       // Redirect to dashboard or home page
+      navigate('/home');
     } catch (err) {
       setError("Login failed. Please check your credentials.");
       console.error(err);
